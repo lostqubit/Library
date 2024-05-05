@@ -5,10 +5,12 @@ function Book(title,author,pages,readStatus=false){
     this.readStatus = readStatus;
 }
 
-function addBookToLibrary(book){
+const addBookToLibrary = (book)=>{
     myLibrary.push(book);
+    bookId++;
 
     const bookContainer = document.createElement("div");
+    bookContainer.id = `card-${bookId}`;
     bookContainer.classList.add("card");
 
     const heading = document.createElement("h3");
@@ -29,8 +31,9 @@ function addBookToLibrary(book){
     editButton.src = "/icons/edit.svg"
     const deleteButton = document.createElement("img");
     deleteButton.src = "/icons/delete.svg"
+    deleteButton.addEventListener("click",deleteBook);
     utilityButtons.appendChild(editButton);
-    utilityButtons.appendChild(deleteButton)
+    utilityButtons.appendChild(deleteButton);
 
     bookContainer.appendChild(heading);
     bookContainer.appendChild(content);
@@ -38,6 +41,12 @@ function addBookToLibrary(book){
     bookGrid.appendChild(bookContainer); 
 }
 
+const deleteBook = (event) =>{
+    const deleteId = event.target.parentElement.parentElement.id;
+    document.querySelector("#"+deleteId).remove();
+}
+
+let bookId = 0;
 const myLibrary = [];
 const bookGrid = document.querySelector(".container");
 
