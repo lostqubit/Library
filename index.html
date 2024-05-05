@@ -12,5 +12,23 @@
     <div class="container">
 
     </div>
+    <div class="add"><img src="/icons/add.svg"></div>
+    <div id="overlay">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Add Book</h2>
+                <div><img id="close" src = "/icons/close.svg"></div>
+            </div>
+            <form id="form">
+                <label for="title" required>Title:</label>
+                <input id="title" name="title" type="text">
+                <label for="author" required>Author:</label>
+                <input id="author" name="author" type="text">
+                <label for="pages" required>Pages:</label>
+                <input id="pages" name="pages" type="number" required>
+            </form>
+            <div><button form="form">Save</button></div>
+        </div>
+    </div>
 </body>
 </html>
