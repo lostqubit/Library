@@ -6,8 +6,8 @@ function Book(title,author,pages,readStatus=false){
 }
 
 const addBookToLibrary = (book)=>{
-    myLibrary.push(book);
     bookId++;
+    myLibrary[bookId] = book;
 
     const bookContainer = document.createElement("div");
     bookContainer.id = `card-${bookId}`;
@@ -29,6 +29,7 @@ const addBookToLibrary = (book)=>{
     utilityButtons.classList.add("utility");
     const editButton = document.createElement("img");
     editButton.src = "/icons/edit.svg"
+    editButton.addEventListener("click",editBook);
     const deleteButton = document.createElement("img");
     deleteButton.src = "/icons/delete.svg"
     deleteButton.addEventListener("click",deleteBook);
@@ -39,44 +40,81 @@ const addBookToLibrary = (book)=>{
     bookContainer.appendChild(content);
     bookContainer.appendChild(utilityButtons);
     bookGrid.appendChild(bookContainer); 
+
 }
 
 const deleteBook = (event) =>{
     const deleteId = event.target.parentElement.parentElement.id;
+    delete myLibrary[deleteId.split("-")[1]];
     document.querySelector("#"+deleteId).remove();
-}
-
-const enableOverlay = () =>{
-    overlay.style.display = "flex";
-}
-
-const closeOverlay = () => {
-    addBookForm.reset();
-    overlay.style.display = "none";
 }
 
 const createBook = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const newBook = new Book(data.get("title"),data.get("author"),data.get("pages"));
-    console.log(newBook);
     addBookToLibrary(newBook);
     addBookForm.reset();
-    overlay.style.display = "none";
+    addOverlay.style.display = "none";
+}
+
+const editBook = (event) => {
+    const selectedBook = event.target.parentElement.parentElement.id;
+    const selectedId = selectedBook.split("-")[1];
+    editOverlay.style.display="flex";
+    editTitle.value = myLibrary[selectedId].title;
+    editAuthor.value = myLibrary[selectedId].author;
+    editPages.value = myLibrary[selectedId].pages;
+
+    editId = selectedId;
+}
+
+const updateBook = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    myLibrary[editId].title = data.get("title");
+    myLibrary[editId].author = data.get("author");
+    myLibrary[editId].pages = data.get("pages");
+
+    document.querySelector(`#card-${editId}>h3`).textContent = myLibrary[editId].title;
+    document.querySelector(`#card-${editId}>div>p:first-child`).textContent = "Author: "+ myLibrary[editId].author;
+    document.querySelector(`#card-${editId}>div>p:last-child`).textContent = "Pages: " + myLibrary[editId].pages;
+
+    editId = -1;
+    editBookForm.reset();
+    editOverlay.style.display = "none";
 }
 
 let bookId = 0;
-const myLibrary = [];
+let editId = -1;
+const myLibrary = {};
 
 const addButton = document.querySelector(".add");
 const bookGrid = document.querySelector(".container");
-const overlay = document.querySelector("#overlay");
+const addOverlay = document.querySelector("#overlay");
+const editOverlay = document.querySelector("#edit-overlay");
 const addBookForm = document.querySelector("#form");
-const closeButton = document.querySelector("#close");
+const editBookForm = document.querySelector("#edit-form");
+const addCloseButton = document.querySelector("#add-close");
+const editCloseButton = document.querySelector("#edit-close");
+const editTitle = document.querySelector("#edit-title");
+const editAuthor = document.querySelector("#edit-author");
+const editPages = document.querySelector("#edit-pages");
 
-addButton.addEventListener("click", enableOverlay);
-closeButton.addEventListener("click", closeOverlay)
-addBookForm.addEventListener("submit",createBook)
+addButton.addEventListener("click", () => {
+    addOverlay.style.display = "flex";
+});
+addCloseButton.addEventListener("click",  () => {
+    addBookForm.reset();
+    addOverlay.style.display = "none";
+});
+addBookForm.addEventListener("submit",createBook);
+editCloseButton.addEventListener("click", () => {
+    editBookForm.reset();
+    editOverlay.style.display = "none";
+    editId = -1;
+})
+editBookForm.addEventListener("submit",updateBook);
 
 const book1 = new Book("The Lord of the Rings","J.R.R Tolkien","1000");
 const book2 = new Book("A Song of Ice and Fire","George R.R Martin","800");
