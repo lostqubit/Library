@@ -35,7 +35,6 @@ h2{
 }
 
 .card{
-    background-color: #a7f3d0;
     /* background-color: #f3e8ff; */
     border-radius: 10px;
     padding: 20px;
@@ -52,6 +51,12 @@ h2{
     gap: 20px;
 }
 
+.content>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .card img{
     display: inline-block;
     height: 20px;
@@ -62,11 +67,9 @@ h2{
 .utility{
     display: flex;
     justify-content: flex-end;
-    margin-top: 80px;
+    margin-top: 44px;
     gap: 20px;
 }
-
-
 
 .add{
 	position:fixed;
@@ -138,8 +141,9 @@ h2{
 }
 
 .form-container{
-    height: 50%;
+    height: 400px;
     width: 300px;
+    overflow-y: auto;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -160,6 +164,19 @@ h2{
     margin-bottom: 10px;
 }
 
+.form-container>form>div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.form-container>form>div>input{
+    width: auto;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
 .form-container>div:last-child{
     display: flex;
     justify-content: center;
@@ -173,4 +190,8 @@ h2{
     color: white;
     font-weight: 700;
     cursor: pointer;
+}
+
+#card-1 .content>p:last-child{
+    font-size: 100px;
 }
