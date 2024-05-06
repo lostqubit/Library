@@ -4,6 +4,6 @@ A simple web application designed to help users organize and manage their person
 
 live demo: https://lostqubit.github.io/Library/
 
-![Screenshot_6-5-2024_11537_lostqubit github io](https://github.com/lostqubit/Library/assets/31575513/041c9db7-76b0-4676-8bad-63b898f2de1a)
+![image](https://github.com/lostqubit/Library/assets/31575513/f1883dbd-26b1-4966-8b49-b08518d00727)
 
 Work done as a part of "The Odin Project" open source curriculum.
