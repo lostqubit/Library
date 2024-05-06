@@ -48,10 +48,10 @@ const addBookToLibrary = (book)=>{
     const utilityButtons = document.createElement("div");
     utilityButtons.classList.add("utility");
     const editButton = document.createElement("img");
-    editButton.src = "/icons/edit.svg"
+    editButton.src = "../../Library/icons/edit.svg"
     editButton.addEventListener("click",editBook);
     const deleteButton = document.createElement("img");
-    deleteButton.src = "/icons/delete.svg"
+    deleteButton.src = "../../Library/icons/delete.svg"
     deleteButton.addEventListener("click",deleteBook);
     utilityButtons.appendChild(editButton);
     utilityButtons.appendChild(deleteButton);
